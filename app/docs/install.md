@@ -3,13 +3,13 @@
 ## Android
 
 1. 前往 Google Play 商店
-2. 搜尋「CT Passport」
+2. 搜尋「福慧學習護照」
 3. 點擊「安裝」
 
 ## iOS
 
 1. 前往 App Store
-2. 搜尋「CT Passport」
+2. 搜尋「福慧學習護照」
 3. 點擊「取得」
 
 ::: tip 提示

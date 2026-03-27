@@ -2,8 +2,7 @@
 
 ## 登入網址
 
-- 正式環境：[admin.ct-passport.org](https://admin.ct-passport.org)
-- 測試環境：[test-admin.ct-passport.org](https://test-admin.ct-passport.org)
+- [admin.ct-passport.org](https://admin.ct-passport.org)
 
 ## 登入方式
 

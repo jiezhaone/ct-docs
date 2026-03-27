@@ -1,7 +1,7 @@
 ---
 layout: home
 hero:
-  name: CT Passport
+  name: 福慧學習護照
   text: App 使用手冊
   tagline: 修行者行動應用程式操作指南
   actions:
@@ -12,7 +12,7 @@ hero:
 
 ## 手冊內容
 
-本手冊涵蓋 CT Passport 行動應用程式的所有功能操作說明，適用於所有修行學員。
+本手冊涵蓋福慧學習護照行動應用程式的所有功能操作說明，適用於所有修行學員。
 
 ### 主要功能
 

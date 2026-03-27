@@ -1,8 +1,8 @@
 import { defineConfig } from 'vitepress'
 
 export default defineConfig({
-  title: 'CT Passport App 使用手冊',
-  description: 'CT Passport 行動應用程式使用手冊',
+  title: '福慧學習護照 App 使用手冊',
+  description: '福慧學習護照 行動應用程式使用手冊',
   base: '/app-manual/',
   lang: 'zh-TW',
   themeConfig: {
@@ -36,7 +36,7 @@ export default defineConfig({
         text: '成就與進度',
         items: [
           { text: '護照進度', link: '/progress' },
-          { text: '成就徽章', link: '/badges' },
+          { text: '當前旅程與修行歷程', link: '/badges' },
         ],
       },
       {
@@ -50,7 +50,7 @@ export default defineConfig({
     outline: { label: '目錄' },
     search: { provider: 'local' },
     footer: {
-      message: 'CT Passport App 使用手冊',
+      message: '福慧學習護照 App 使用手冊',
     },
   },
 })

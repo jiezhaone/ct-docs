@@ -1,8 +1,8 @@
 import { defineConfig } from 'vitepress'
 
 export default defineConfig({
-  title: 'CT Passport 使用手冊',
-  description: 'CT Passport 管理後台使用手冊',
+  title: '福慧學習護照 使用手冊',
+  description: '福慧學習護照 管理後台使用手冊',
   base: '/admin-manual/',
   lang: 'zh-TW',
   themeConfig: {
@@ -49,7 +49,7 @@ export default defineConfig({
     outline: { label: '目錄' },
     search: { provider: 'local' },
     footer: {
-      message: 'CT Passport 管理後台使用手冊',
+      message: '福慧學習護照 管理後台使用手冊',
     },
   },
 })

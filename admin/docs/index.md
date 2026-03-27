@@ -1,7 +1,7 @@
 ---
 layout: home
 hero:
-  name: CT Passport
+  name: 福慧學習護照
   text: 管理後台使用手冊
   tagline: 精舍法師 / CT 管理員操作指南
   actions:
@@ -15,7 +15,7 @@ hero:
 
 ## 手冊內容
 
-本手冊涵蓋 CT Passport 管理後台的所有功能操作說明，適用於精舍法師（DM）及 CT 管理員。
+本手冊涵蓋福慧學習護照管理後台的所有功能操作說明，適用於精舍法師（DM）及 CT 管理員。
 
 ### 主要功能
 
