@@ -1,0 +1,25 @@
+{
+  "name": "ct-docs",
+  "version": "1.0.0",
+  "description": "",
+  "type": "module",
+  "scripts": {
+    "dev": "vitepress dev docs",
+    "build": "vitepress build docs",
+    "preview": "vitepress preview docs"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jiezhaone/ct-docs.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jiezhaone/ct-docs/issues"
+  },
+  "homepage": "https://github.com/jiezhaone/ct-docs#readme",
+  "devDependencies": {
+    "vitepress": "^1.6.4"
+  }
+}
