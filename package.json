@@ -4,9 +4,13 @@
   "description": "",
   "type": "module",
   "scripts": {
-    "dev": "vitepress dev docs",
-    "build": "vitepress build docs",
-    "preview": "vitepress preview docs"
+    "dev:admin": "vitepress dev admin/docs",
+    "dev:app": "vitepress dev app/docs",
+    "build:admin": "vitepress build admin/docs",
+    "build:app": "vitepress build app/docs",
+    "build": "npm run build:admin && npm run build:app",
+    "preview:admin": "vitepress preview admin/docs",
+    "preview:app": "vitepress preview app/docs"
   },
   "repository": {
     "type": "git",

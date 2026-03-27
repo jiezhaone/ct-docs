@@ -1,4 +1,4 @@
-name: Deploy User Manual
+name: Deploy User Manuals
 
 on:
   push:
@@ -17,12 +17,22 @@ jobs:
       - run: npm ci
       - run: npm run build
 
-      - name: Deploy to Hostinger via FTPS
+      - name: Deploy Admin Manual via FTPS
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5
         with:
           server: ${{ secrets.FTP_HOST }}
           username: ${{ secrets.FTP_USER }}
           password: ${{ secrets.FTP_PASS }}
-          local-dir: docs/.vitepress/dist/
-          server-dir: domains/ct-passport.org/public_html/admin-user-manual/
+          local-dir: admin/docs/.vitepress/dist/
+          server-dir: domains/ct-passport.org/public_html/admin-manual/
+          protocol: ftps
+
+      - name: Deploy App Manual via FTPS
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.FTP_HOST }}
+          username: ${{ secrets.FTP_USER }}
+          password: ${{ secrets.FTP_PASS }}
+          local-dir: app/docs/.vitepress/dist/
+          server-dir: domains/ct-passport.org/public_html/app-manual/
           protocol: ftps

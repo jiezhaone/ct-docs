@@ -3,7 +3,7 @@ import { defineConfig } from 'vitepress'
 export default defineConfig({
   title: 'CT Passport 使用手冊',
   description: 'CT Passport 管理後台使用手冊',
-  base: '/admin-user-manual/',
+  base: '/admin-manual/',
   lang: 'zh-TW',
   themeConfig: {
     nav: [
