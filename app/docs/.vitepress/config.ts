@@ -5,6 +5,7 @@ export default defineConfig({
   description: '福慧學習護照 行動應用程式使用手冊',
   base: '/app-manual/',
   lang: 'zh-TW',
+  head: [['link', { rel: 'icon', href: '/app-manual/favicon.ico' }]],
   themeConfig: {
     nav: [
       { text: '首頁', link: '/' },
