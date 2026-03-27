@@ -4,6 +4,11 @@ on:
   push:
     branches: [main]
 
+env:
+  SSH: ssh -i ~/.ssh/deploy_key -p 65002 -o StrictHostKeyChecking=no -o ConnectTimeout=10
+  SCP: scp -r -i ~/.ssh/deploy_key -P 65002 -o StrictHostKeyChecking=no -o ConnectTimeout=10
+  TARGET: ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}
+
 jobs:
   deploy:
     runs-on: ubuntu-latest
@@ -12,27 +17,52 @@ jobs:
 
       - uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: '24'
+          cache: 'npm'
 
-      - run: npm ci
-      - run: npm run build
+      - name: Install and build
+        run: |
+          npm ci
+          npm run build
 
-      - name: Deploy Admin Manual via FTPS
-        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
-        with:
-          server: ${{ secrets.FTP_HOST }}
-          username: ${{ secrets.FTP_USER }}
-          password: ${{ secrets.FTP_PASS }}
-          local-dir: admin/docs/.vitepress/dist/
-          server-dir: domains/ct-passport.org/public_html/admin-manual/
-          protocol: ftps
+      - name: Setup SSH key
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/deploy_key
+          chmod 600 ~/.ssh/deploy_key
+          ssh-keyscan -p 65002 ${{ secrets.SSH_HOST }} >> ~/.ssh/known_hosts 2>/dev/null || true
 
-      - name: Deploy App Manual via FTPS
-        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
-        with:
-          server: ${{ secrets.FTP_HOST }}
-          username: ${{ secrets.FTP_USER }}
-          password: ${{ secrets.FTP_PASS }}
-          local-dir: app/docs/.vitepress/dist/
-          server-dir: domains/ct-passport.org/public_html/app-manual/
-          protocol: ftps
+      - name: Deploy Admin Manual via SCP
+        run: |
+          REMOTE_DIR='~/domains/ct-passport.org/public_html/admin-manual'
+          for attempt in 1 2 3; do
+            echo "Attempt $attempt/3..."
+            ${{ env.SSH }} ${{ env.TARGET }} "mkdir -p ${REMOTE_DIR}" && \
+              ${{ env.SCP }} admin/docs/.vitepress/dist/* ${{ env.TARGET }}:${REMOTE_DIR}/ && \
+              { echo "Admin manual deploy successful"; break; }
+            [ $attempt -lt 3 ] && { echo "Retrying in 30s..."; sleep 30; } || { echo "All attempts failed"; exit 1; }
+          done
+
+      - name: Deploy App Manual via SCP
+        run: |
+          REMOTE_DIR='~/domains/ct-passport.org/public_html/app-manual'
+          for attempt in 1 2 3; do
+            echo "Attempt $attempt/3..."
+            ${{ env.SSH }} ${{ env.TARGET }} "mkdir -p ${REMOTE_DIR}" && \
+              ${{ env.SCP }} app/docs/.vitepress/dist/* ${{ env.TARGET }}:${REMOTE_DIR}/ && \
+              { echo "App manual deploy successful"; break; }
+            [ $attempt -lt 3 ] && { echo "Retrying in 30s..."; sleep 30; } || { echo "All attempts failed"; exit 1; }
+          done
+
+      - name: Health check
+        run: |
+          sleep 5
+          for url in https://ct-passport.org/admin-manual/ https://ct-passport.org/app-manual/; do
+            STATUS=$(curl -s -o /dev/null -w "%{http_code}" "$url")
+            echo "Health check $url: $STATUS"
+            if [ "$STATUS" != "200" ] && [ "$STATUS" != "301" ] && [ "$STATUS" != "302" ]; then
+              echo "Health check failed for $url"
+              exit 1
+            fi
+          done
+          echo "Both manuals are healthy"
