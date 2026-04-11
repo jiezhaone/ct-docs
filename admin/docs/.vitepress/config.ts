@@ -46,6 +46,12 @@ export default defineConfig({
           { text: '活動統計', link: '/activity-stats' },
         ],
       },
+      {
+        text: 'CT 管理員',
+        items: [
+          { text: '法師管理', link: '/masters' },
+        ],
+      },
     ],
     outline: { label: '目錄' },
     search: { provider: 'local' },
