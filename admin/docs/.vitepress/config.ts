@@ -50,6 +50,10 @@ export default defineConfig({
         text: 'CT 管理員',
         items: [
           { text: '法師管理', link: '/masters' },
+          { text: '學員參與', link: '/engagement' },
+          { text: '蓋印進度', link: '/stamp-progress' },
+          { text: '達標門檻設定', link: '/thresholds' },
+          { text: '修行內容管理', link: '/practice-content' },
         ],
       },
     ],
