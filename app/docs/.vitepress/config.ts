@@ -23,6 +23,7 @@ export default defineConfig({
         text: '修行記錄',
         items: [
           { text: '報數（提交記錄）', link: '/submit-practice' },
+          { text: '歷史記錄', link: '/history' },
           { text: '八大修行項目', link: '/activity-types' },
           { text: '經典管理', link: '/sutras' },
         ],
@@ -38,6 +39,12 @@ export default defineConfig({
         items: [
           { text: '護照進度', link: '/progress' },
           { text: '當前旅程與修行歷程', link: '/badges' },
+        ],
+      },
+      {
+        text: '通知',
+        items: [
+          { text: '通知訊息', link: '/notifications' },
         ],
       },
       {
