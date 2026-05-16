@@ -20,25 +20,25 @@ export default defineConfig({
         ],
       },
       {
+        text: '成就與進度',
+        items: [
+          { text: '開啟旅程與修行歷程', link: '/journey' },
+          { text: '護照進度', link: '/progress' },
+        ],
+      },
+      {
         text: '修行記錄',
         items: [
           { text: '報數（提交記錄）', link: '/submit-practice' },
           { text: '歷史記錄', link: '/history' },
           { text: '八大修行項目', link: '/activity-types' },
-          { text: '經典管理', link: '/sutras' },
+          { text: '修習內容管理', link: '/sutras' },
         ],
       },
       {
         text: '我的課程',
         items: [
           { text: '查看課程', link: '/my-courses' },
-        ],
-      },
-      {
-        text: '成就與進度',
-        items: [
-          { text: '護照進度', link: '/progress' },
-          { text: '當前旅程與修行歷程', link: '/badges' },
         ],
       },
       {
