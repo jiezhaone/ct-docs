@@ -2,15 +2,23 @@
 
 ## Android
 
-1. 前往 Google Play 商店
+1. 前往 [Google Play 商店](https://play.google.com/store/apps/details?id=org.ctpassport.app)
 2. 搜尋「福慧學習護照」
 3. 點擊「安裝」
 
+或使用手機相機掃描下方 QR Code 直接前往 Google Play：
+
+<img src="/qr-android.png" alt="Google Play QR Code" width="220" />
+
 ## iOS
 
-1. 前往 App Store
+1. 前往 [App Store](https://apps.apple.com/app/%E7%A6%8F%E6%85%A7%E5%AD%B8%E7%BF%92%E8%AD%B7%E7%85%A7/id6760577998)
 2. 搜尋「福慧學習護照」
 3. 點擊「取得」
+
+或使用 iPhone 相機掃描下方 QR Code 直接前往 App Store：
+
+<img src="/qr-ios.png" alt="iOS App Store QR Code" width="220" />
 
 ## 網頁版
 
