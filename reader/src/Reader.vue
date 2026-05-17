@@ -401,6 +401,15 @@ onBeforeUnmount(() => {
 }
 
 .reader__topbar,
+.reader__bottombar,
+.reader__sheet,
+.reader__toc-panel {
+  font-family: "Noto Sans TC", "Source Han Sans TC", "Source Han Sans SC",
+    "PingFang TC", "Microsoft JhengHei", -apple-system, BlinkMacSystemFont,
+    "Segoe UI", Roboto, sans-serif;
+}
+
+.reader__topbar,
 .reader__bottombar {
   position: fixed;
   left: 0; right: 0;

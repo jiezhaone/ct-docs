@@ -35,7 +35,9 @@ function open(id: string) {
   background: #f4ecd8;
   color: #2d2a26;
   overflow-y: auto;
-  font-family: "Noto Serif TC", "PingFang TC", "Songti TC", serif;
+  font-family: "Noto Sans TC", "Source Han Sans TC", "Source Han Sans SC",
+    "PingFang TC", "Microsoft JhengHei", -apple-system, BlinkMacSystemFont,
+    "Segoe UI", Roboto, sans-serif;
 }
 .library__inner {
   max-width: 560px;
