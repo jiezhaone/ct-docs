@@ -54,10 +54,21 @@ jobs:
             [ $attempt -lt 3 ] && { echo "Retrying in 30s..."; sleep 30; } || { echo "All attempts failed"; exit 1; }
           done
 
+      - name: Deploy Reader via SCP
+        run: |
+          REMOTE_DIR='~/domains/ct-passport.org/public_html/reader'
+          for attempt in 1 2 3; do
+            echo "Attempt $attempt/3..."
+            ${{ env.SSH }} ${{ env.TARGET }} "mkdir -p ${REMOTE_DIR}" && \
+              ${{ env.SCP }} reader/dist/* ${{ env.TARGET }}:${REMOTE_DIR}/ && \
+              { echo "Reader deploy successful"; break; }
+            [ $attempt -lt 3 ] && { echo "Retrying in 30s..."; sleep 30; } || { echo "All attempts failed"; exit 1; }
+          done
+
       - name: Health check
         run: |
           sleep 5
-          for url in https://ct-passport.org/admin-manual/ https://ct-passport.org/app-manual/; do
+          for url in https://ct-passport.org/admin-manual/ https://ct-passport.org/app-manual/ https://ct-passport.org/reader/; do
             STATUS=$(curl -s -o /dev/null -w "%{http_code}" "$url")
             echo "Health check $url: $STATUS"
             if [ "$STATUS" != "200" ] && [ "$STATUS" != "301" ] && [ "$STATUS" != "302" ]; then
@@ -65,4 +76,4 @@ jobs:
               exit 1
             fi
           done
-          echo "Both manuals are healthy"
+          echo "All sites are healthy"
