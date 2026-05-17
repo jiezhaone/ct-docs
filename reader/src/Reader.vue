@@ -244,7 +244,7 @@ onBeforeUnmount(() => {
       <div v-if="showChrome" class="reader__topbar">
         <button class="icon-btn" @click="showToc = true" aria-label="目錄">☰</button>
         <span class="reader__topbar-title">{{ cTitle }}</span>
-        <button class="icon-btn reader__aa" @click="showSettings = !showSettings" aria-label="設定">Aa</button>
+        <button class="icon-btn reader__settings-btn" @click="showSettings = !showSettings" :aria-label="conv('設定')">{{ conv('設定') }}</button>
       </div>
     </transition>
 
@@ -491,10 +491,12 @@ onBeforeUnmount(() => {
 }
 .reader__toc-panel button:hover { background: var(--hover); }
 
-.reader__aa {
-  font-size: calc(var(--font-size) * 0.85);
-  font-weight: 600;
-  font-style: italic;
+.reader__settings-btn {
+  width: auto;
+  padding: 0 0.7em;
+  font-size: calc(var(--font-size) * 0.72);
+  font-weight: 500;
+  letter-spacing: 0.05em;
 }
 
 .reader__sheet {
