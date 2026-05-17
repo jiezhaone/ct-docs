@@ -4,3 +4,4 @@ admin/docs/.vitepress/dist
 app/docs/.vitepress/cache
 app/docs/.vitepress/dist
 reader/dist
+reader/docs
