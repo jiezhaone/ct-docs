@@ -233,7 +233,11 @@ onBeforeUnmount(() => {
 
     <transition name="fade">
       <div v-if="showChrome" class="reader__topbar">
-        <button class="icon-btn" @click="showToc = true" aria-label="目錄">☰</button>
+        <button class="icon-btn" @click="showToc = true" :aria-label="conv('目錄')">
+          <svg viewBox="0 0 24 24" width="1em" height="1em" aria-hidden="true">
+            <path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none" />
+          </svg>
+        </button>
         <span class="reader__topbar-title">{{ cTitle }}</span>
         <button class="icon-btn reader__settings-btn" @click="showSettings = !showSettings" :aria-label="conv('設定')">{{ conv('設定') }}</button>
       </div>
@@ -444,6 +448,9 @@ button { font-family: inherit; }
 
 .icon-btn {
   font-family: inherit;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   width: calc(var(--font-size) * 1.9);
   height: calc(var(--font-size) * 1.9);
   border: none;
