@@ -8,7 +8,7 @@ export const sutra = {
   id: 'diamond_sutra_zh',
   title: '金剛般若波羅蜜經',
   lang: 'zh-Hant',
-  preface: '南無本師釋迦牟尼佛',
+  preface: '南無本師釋迦牟尼佛（三稱）',
   sections: [
     { id: 'kai-jing-ji', title: '開經偈', body: '無上甚深微妙法。百千萬劫難遭遇\n我今見聞得受持。願解如來真實義' },
     { id: 'fa-hui-yin-you', title: '法會因由分第一', body: '如是我聞。一時佛在舍衛國。祇樹給孤獨園。與大比丘眾。千二百五十人俱。爾時世尊食時。著衣持缽。入舍衛大城乞食。於其城中。次第乞已。還至本處。飯食訖。收衣缽。洗足已。敷座而坐。' },
