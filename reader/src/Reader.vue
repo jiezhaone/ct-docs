@@ -132,6 +132,19 @@ function jumpToAnchor(id: string) {
   requestAnimationFrame(() => { animating.value = true })
 }
 
+function onClick(e: MouseEvent) {
+  const target = e.target as HTMLElement | null
+  if (target && target.closest('button, a, .reader__topbar, .reader__bottombar, .reader__sheet, .reader__toc')) return
+  const x = e.clientX
+  const w = window.innerWidth
+  if (x < w / 3) prevPage()
+  else if (x > (w * 2) / 3) nextPage()
+  else {
+    showChrome.value = !showChrome.value
+    if (!showChrome.value) showSettings.value = false
+  }
+}
+
 function onResize() {
   const anchor = currentSectionId()
   nextTick(() => {
@@ -208,6 +221,7 @@ onBeforeUnmount(() => {
       class="reader__viewer"
       @touchstart.passive="onTouchStart"
       @touchend.passive="onTouchEnd"
+      @click="onClick"
     >
       <div
         ref="track"
