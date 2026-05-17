@@ -167,18 +167,9 @@ function onTouchEnd(e: TouchEvent) {
   const dt = Date.now() - touchStartT
   if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy) && dt < 600) {
     if (dx < 0) nextPage(); else prevPage()
-    return
   }
-  if (Math.abs(dx) < 8 && Math.abs(dy) < 8) {
-    const x = t.clientX
-    const w = window.innerWidth
-    if (x < w / 3) prevPage()
-    else if (x > (w * 2) / 3) nextPage()
-    else {
-      showChrome.value = !showChrome.value
-      if (!showChrome.value) showSettings.value = false
-    }
-  }
+  // Taps fall through to onClick, which handles zone-based prev/next/toggle
+  // for both mouse and touch.
 }
 
 function onKey(e: KeyboardEvent) {
