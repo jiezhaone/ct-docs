@@ -1,5 +1,5 @@
-import type { Section } from './jingang'
-import { sutra as diamondSutraZh } from './jingang'
+import type { Section } from './diamond_sutra'
+import { sutra as diamondSutraZh } from './diamond_sutra'
 
 export type Lang = 'zh-Hant' | 'zh-Hans' | 'en'
 

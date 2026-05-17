@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { computed, onBeforeUnmount, onMounted, ref, watch, nextTick } from 'vue'
 import { Converter } from 'opencc-js'
-import type { Section } from './jingang'
+import type { Section } from './diamond_sutra'
 
 const props = defineProps<{
   sutra: { id: string; title: string; preface?: string; sections: Section[] }
