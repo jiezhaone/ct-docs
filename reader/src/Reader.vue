@@ -429,7 +429,9 @@ onBeforeUnmount(() => {
   text-overflow: ellipsis;
 }
 .reader__group { display: flex; gap: 4px; }
+button { font-family: inherit; }
 .size-btn {
+  font-family: inherit;
   font-size: calc(var(--font-size) * 0.65);
   padding: 0.3em 0.55em;
   border: 1px solid var(--btn-border);
@@ -441,6 +443,7 @@ onBeforeUnmount(() => {
 .size-btn.is-active { background: var(--btn-active-bg); color: var(--btn-active-text); border-color: transparent; }
 
 .icon-btn {
+  font-family: inherit;
   width: calc(var(--font-size) * 1.9);
   height: calc(var(--font-size) * 1.9);
   border: none;
