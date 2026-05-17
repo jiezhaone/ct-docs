@@ -360,7 +360,11 @@ onBeforeUnmount(() => {
 
 .reader__content {
   height: 100%;
-  padding: 56px 28px 56px;
+  padding-top: calc(var(--font-size) * 2.8 + env(safe-area-inset-top, 0px));
+  padding-bottom: calc(var(--font-size) * 2.8 + env(safe-area-inset-bottom, 0px));
+  padding-left: 28px;
+  padding-right: 28px;
+  box-sizing: border-box;
   column-fill: auto;
   column-width: calc(100vw - 56px);
   column-gap: 56px;
@@ -418,8 +422,17 @@ onBeforeUnmount(() => {
   -webkit-backdrop-filter: blur(6px);
   z-index: 10;
 }
-.reader__topbar { top: 0; border-bottom: 1px solid var(--border); }
-.reader__bottombar { bottom: 0; border-top: 1px solid var(--border); justify-content: center; }
+.reader__topbar {
+  top: 0;
+  border-bottom: 1px solid var(--border);
+  padding-top: calc(10px + env(safe-area-inset-top, 0px));
+}
+.reader__bottombar {
+  bottom: 0;
+  border-top: 1px solid var(--border);
+  justify-content: center;
+  padding-bottom: calc(10px + env(safe-area-inset-bottom, 0px));
+}
 
 .reader__topbar-title {
   flex: 1 1 120px;
@@ -512,7 +525,7 @@ button { font-family: inherit; }
 .reader__sheet {
   position: fixed;
   left: 0; right: 0;
-  bottom: calc(var(--font-size) * 2.5);
+  bottom: calc(var(--font-size) * 2.5 + env(safe-area-inset-bottom, 0px));
   margin: 0 auto;
   max-width: 480px;
   background: var(--chrome-bg);
