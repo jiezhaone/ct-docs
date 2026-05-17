@@ -1,6 +1,7 @@
 import type { Section } from './diamond_sutra'
 import { sutra as diamondSutraZh } from './diamond_sutra'
 import { sutra as medicineSutraZh } from './medicine_sutra'
+import { sutra as guanyinSutraZh } from './guanyin_sutra'
 
 export type Lang = 'zh-Hant' | 'zh-Hans' | 'en'
 
@@ -18,7 +19,7 @@ export interface Sutra {
   sections: Section[]
 }
 
-export const sutras: Sutra[] = [diamondSutraZh as Sutra, medicineSutraZh as Sutra]
+export const sutras: Sutra[] = [diamondSutraZh as Sutra, medicineSutraZh as Sutra, guanyinSutraZh as Sutra]
 
 export function findSutra(id: string | null): Sutra | undefined {
   if (!id) return undefined
