@@ -4,61 +4,118 @@ export default defineConfig({
   title: '福慧學習護照 App 使用手冊',
   description: '福慧學習護照 行動應用程式使用手冊',
   base: '/app-manual/',
-  lang: 'zh-TW',
   head: [['link', { rel: 'icon', href: '/app-manual/favicon.ico' }]],
-  themeConfig: {
-    nav: [
-      { text: '首頁', link: '/' },
-    ],
-    sidebar: [
-      {
-        text: '開始使用',
-        items: [
-          { text: '簡介', link: '/' },
-          { text: '下載與安裝', link: '/install' },
-          { text: '登入與註冊', link: '/login' },
+
+  locales: {
+    root: {
+      label: '繁體中文',
+      lang: 'zh-TW',
+      title: '福慧學習護照 App 使用手冊',
+      description: '福慧學習護照 行動應用程式使用手冊',
+      themeConfig: {
+        nav: [{ text: '首頁', link: '/' }],
+        sidebar: [
+          {
+            text: '開始使用',
+            items: [
+              { text: '簡介', link: '/' },
+              { text: '下載與安裝', link: '/install' },
+              { text: '登入與註冊', link: '/login' },
+            ],
+          },
+          {
+            text: '成就與進度',
+            items: [
+              { text: '開啟旅程與修行歷程', link: '/journey' },
+              { text: '護照進度', link: '/progress' },
+            ],
+          },
+          {
+            text: '修行記錄',
+            items: [
+              { text: '報數（提交記錄）', link: '/submit-practice' },
+              { text: '歷史記錄', link: '/history' },
+              { text: '八大修行項目', link: '/activity-types' },
+              { text: '修習內容管理', link: '/sutras' },
+            ],
+          },
+          {
+            text: '我的課程',
+            items: [{ text: '查看課程', link: '/my-courses' }],
+          },
+          {
+            text: '通知',
+            items: [{ text: '通知訊息', link: '/notifications' }],
+          },
+          {
+            text: '個人設定',
+            items: [
+              { text: '個人資料', link: '/profile' },
+              { text: '語言切換', link: '/language' },
+            ],
+          },
         ],
+        outline: { label: '目錄' },
+        footer: { message: '福慧學習護照 App 使用手冊' },
       },
-      {
-        text: '成就與進度',
-        items: [
-          { text: '開啟旅程與修行歷程', link: '/journey' },
-          { text: '護照進度', link: '/progress' },
-        ],
-      },
-      {
-        text: '修行記錄',
-        items: [
-          { text: '報數（提交記錄）', link: '/submit-practice' },
-          { text: '歷史記錄', link: '/history' },
-          { text: '八大修行項目', link: '/activity-types' },
-          { text: '修習內容管理', link: '/sutras' },
-        ],
-      },
-      {
-        text: '我的課程',
-        items: [
-          { text: '查看課程', link: '/my-courses' },
-        ],
-      },
-      {
-        text: '通知',
-        items: [
-          { text: '通知訊息', link: '/notifications' },
-        ],
-      },
-      {
-        text: '個人設定',
-        items: [
-          { text: '個人資料', link: '/profile' },
-          { text: '語言切換', link: '/language' },
-        ],
-      },
-    ],
-    outline: { label: '目錄' },
-    search: { provider: 'local' },
-    footer: {
-      message: '福慧學習護照 App 使用手冊',
     },
+
+    en: {
+      label: 'English',
+      lang: 'en',
+      link: '/en/',
+      title: 'CT Passport App User Manual',
+      description: 'User manual for the CT Passport mobile app',
+      themeConfig: {
+        nav: [{ text: 'Home', link: '/en/' }],
+        sidebar: [
+          {
+            text: 'Getting Started',
+            items: [
+              { text: 'Introduction', link: '/en/' },
+              { text: 'Download & Install', link: '/en/install' },
+              { text: 'Login & Registration', link: '/en/login' },
+            ],
+          },
+          {
+            text: 'Achievements & Progress',
+            items: [
+              { text: 'Starting a Journey & Past Journeys', link: '/en/journey' },
+              { text: 'Passport Progress', link: '/en/progress' },
+            ],
+          },
+          {
+            text: 'Practice Records',
+            items: [
+              { text: 'Logging Practice', link: '/en/submit-practice' },
+              { text: 'History', link: '/en/history' },
+              { text: 'The Eight Practice Activities', link: '/en/activity-types' },
+              { text: 'Practice Content Management', link: '/en/sutras' },
+            ],
+          },
+          {
+            text: 'My Courses',
+            items: [{ text: 'View Courses', link: '/en/my-courses' }],
+          },
+          {
+            text: 'Notifications',
+            items: [{ text: 'Notifications', link: '/en/notifications' }],
+          },
+          {
+            text: 'Personal Settings',
+            items: [
+              { text: 'Profile', link: '/en/profile' },
+              { text: 'Language Switch', link: '/en/language' },
+            ],
+          },
+        ],
+        outline: { label: 'On this page' },
+        footer: { message: 'CT Passport App User Manual' },
+      },
+    },
+  },
+
+  themeConfig: {
+    search: { provider: 'local' },
   },
 })
