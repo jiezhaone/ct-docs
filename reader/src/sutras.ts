@@ -13,6 +13,7 @@ import { sutra as shurangamaSutraVol3Zh } from './shurangama_sutra_vol_3'
 import { sutra as shurangamaSutraVol4Zh } from './shurangama_sutra_vol_4'
 import { sutra as shurangamaSutraVol5Zh } from './shurangama_sutra_vol_5'
 import { sutra as shurangamaSutraVol6Zh } from './shurangama_sutra_vol_6'
+import { sutra as shurangamaSutraVol7Zh } from './shurangama_sutra_vol_7'
 
 export type Lang = 'zh-Hant' | 'zh-Hans' | 'en'
 
@@ -45,6 +46,7 @@ export const sutras: Sutra[] = [
   shurangamaSutraVol4Zh as Sutra,
   shurangamaSutraVol5Zh as Sutra,
   shurangamaSutraVol6Zh as Sutra,
+  shurangamaSutraVol7Zh as Sutra,
 ]
 
 export function findSutra(id: string | null): Sutra | undefined {
