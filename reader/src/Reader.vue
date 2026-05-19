@@ -20,7 +20,7 @@ type Theme = (typeof THEMES)[number]
 const THEME_LABEL: Record<Theme, string> = { day: '日間', night: '夜間' }
 
 const STORAGE_KEY = `reader.state.${props.sutra.id}`
-interface Saved { size: Size; anchor?: string; script?: Script; theme?: Theme }
+interface Saved { size: Size; anchor?: string; pageOffset?: number; script?: Script; theme?: Theme }
 
 function loadSaved(): Saved {
   try {
@@ -35,6 +35,7 @@ const size = ref<Size>(saved.size)
 const script = ref<Script>(saved.script ?? 't')
 const theme = ref<Theme>(saved.theme ?? 'day')
 const pendingAnchor = ref<string | undefined>(saved.anchor)
+const pendingPageOffset = ref<number>(saved.pageOffset ?? 0)
 
 const toSimplified = Converter({ from: 'tw', to: 'cn' })
 const conv = (text: string) => (script.value === 's' ? toSimplified(text) : text)
@@ -59,12 +60,25 @@ const animating = ref(true)
 const fontPx = computed(() => SIZE_PX[size.value])
 const trackTransform = computed(() => `translateX(${-currentPage.value * pageWidth.value}px)`)
 
+function sectionStartPage(id: string): number | undefined {
+  const t = track.value
+  if (!t || !pageWidth.value) return undefined
+  const el = t.querySelector<HTMLElement>(`[data-section="${id}"]`)
+  if (!el) return undefined
+  return Math.floor(el.offsetLeft / pageWidth.value)
+}
+
 function persist() {
   const sectionId = currentSectionId()
+  const startPage = sectionId ? sectionStartPage(sectionId) : undefined
+  const pageOffset = startPage !== undefined
+    ? Math.max(0, currentPage.value - startPage)
+    : 0
   try {
     localStorage.setItem(STORAGE_KEY, JSON.stringify({
       size: size.value,
       anchor: sectionId,
+      pageOffset,
       script: script.value,
       theme: theme.value,
     }))
@@ -193,7 +207,15 @@ watch(theme, persist)
 
 onMounted(() => {
   measure()
-  if (pendingAnchor.value) jumpToAnchor(pendingAnchor.value)
+  if (pendingAnchor.value) {
+    jumpToAnchor(pendingAnchor.value)
+    if (pendingPageOffset.value > 0) {
+      const target = currentPage.value + pendingPageOffset.value
+      animating.value = false
+      currentPage.value = Math.max(0, Math.min(totalPages.value - 1, target))
+      requestAnimationFrame(() => { animating.value = true })
+    }
+  }
   window.addEventListener('resize', onResize)
   window.addEventListener('keydown', onKey)
   setTimeout(() => { showChrome.value = false }, 1800)
