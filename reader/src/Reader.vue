@@ -68,6 +68,42 @@ function sectionStartPage(id: string): number | undefined {
   return Math.floor(el.offsetLeft / pageWidth.value)
 }
 
+function sectionPageCount(id: string): number {
+  const t = track.value
+  if (!t || !pageWidth.value) return 1
+  const els = Array.from(t.querySelectorAll<HTMLElement>('[data-section]'))
+  const i = els.findIndex((e) => e.dataset.section === id)
+  if (i < 0) return 1
+  const start = Math.floor(els[i].offsetLeft / pageWidth.value)
+  const next = i + 1 < els.length
+    ? Math.floor(els[i + 1].offsetLeft / pageWidth.value)
+    : totalPages.value
+  return Math.max(1, next - start)
+}
+
+// Capture position as {anchor, fraction-within-section} so we can restore
+// proportionally after a layout change (font size / script / resize).
+function captureProgress(): { anchor: string; fraction: number } | undefined {
+  const anchor = currentSectionId()
+  if (!anchor) return undefined
+  const start = sectionStartPage(anchor)
+  if (start === undefined) return undefined
+  const pages = sectionPageCount(anchor)
+  return { anchor, fraction: (currentPage.value - start) / pages }
+}
+
+function restoreProgress(p: { anchor: string; fraction: number }) {
+  jumpToAnchor(p.anchor)
+  const pages = sectionPageCount(p.anchor)
+  const advance = Math.max(0, Math.min(pages - 1, Math.round(p.fraction * pages)))
+  if (advance > 0) {
+    const target = currentPage.value + advance
+    animating.value = false
+    currentPage.value = Math.max(0, Math.min(totalPages.value - 1, target))
+    requestAnimationFrame(() => { animating.value = true })
+  }
+}
+
 function persist() {
   const sectionId = currentSectionId()
   const startPage = sectionId ? sectionStartPage(sectionId) : undefined
@@ -86,11 +122,11 @@ function persist() {
 }
 
 function setScript(s: Script) {
-  const anchor = currentSectionId()
+  const progress = captureProgress()
   script.value = s
   nextTick(() => {
     measure()
-    if (anchor) jumpToAnchor(anchor)
+    if (progress) restoreProgress(progress)
     persist()
   })
 }
@@ -160,10 +196,10 @@ function onClick(e: MouseEvent) {
 }
 
 function onResize() {
-  const anchor = currentSectionId()
+  const progress = captureProgress()
   nextTick(() => {
     measure()
-    if (anchor) jumpToAnchor(anchor)
+    if (progress) restoreProgress(progress)
   })
 }
 
@@ -193,11 +229,11 @@ function onKey(e: KeyboardEvent) {
 }
 
 function setSize(s: Size) {
-  const anchor = currentSectionId()
+  const progress = captureProgress()
   size.value = s
   nextTick(() => {
     measure()
-    if (anchor) jumpToAnchor(anchor)
+    if (progress) restoreProgress(progress)
     persist()
   })
 }
