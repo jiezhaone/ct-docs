@@ -41,10 +41,20 @@ const toSimplified = Converter({ from: 'tw', to: 'cn' })
 const conv = (text: string) => (script.value === 's' ? toSimplified(text) : text)
 const cTitle = computed(() => conv(props.sutra.title))
 const cPreface = computed(() => props.sutra.preface ? conv(props.sutra.preface) : '')
+
+type Block = { kind: 'text'; text: string } | { kind: 'image'; src: string; alt: string }
+const IMG_RE = /^!\[([^\]]*)\]\(([^)]+)\)\s*$/
+
+function parseLine(line: string): Block {
+  const m = IMG_RE.exec(line)
+  if (m) return { kind: 'image', alt: m[1], src: m[2] }
+  return { kind: 'text', text: conv(line) }
+}
+
 const cSections = computed(() => props.sutra.sections.map((s) => ({
   id: s.id,
   title: conv(s.title),
-  lines: s.body.split('\n').map(conv),
+  blocks: s.body.split('\n').map(parseLine),
 })))
 
 const viewer = ref<HTMLElement | null>(null)
@@ -203,6 +213,20 @@ function onResize() {
   })
 }
 
+// Images load async — reflow changes pagination, so re-measure and restore
+// the user's position. Coalesced via rAF so many concurrent loads cost once.
+let imageReflowPending = false
+function onImageLoad() {
+  if (imageReflowPending) return
+  imageReflowPending = true
+  requestAnimationFrame(() => {
+    imageReflowPending = false
+    const progress = captureProgress()
+    measure()
+    if (progress) restoreProgress(progress)
+  })
+}
+
 let touchStartX = 0
 let touchStartY = 0
 let touchStartT = 0
@@ -283,7 +307,13 @@ onBeforeUnmount(() => {
           <p v-if="cPreface" class="reader__preface">{{ cPreface }}</p>
           <section v-for="s in cSections" :key="s.id" :data-section="s.id">
             <h2 class="reader__h2">{{ s.title }}</h2>
-            <p v-for="(line, i) in s.lines" :key="i" class="reader__p">{{ line }}</p>
+            <template v-for="(b, i) in s.blocks" :key="i">
+              <p v-if="b.kind === 'text'" class="reader__p">{{ b.text }}</p>
+              <figure v-else class="reader__figure">
+                <img :src="b.src" :alt="b.alt" @load="onImageLoad" @error="onImageLoad" />
+                <figcaption v-if="b.alt">{{ conv(b.alt) }}</figcaption>
+              </figure>
+            </template>
           </section>
         </div>
       </div>
@@ -455,6 +485,24 @@ onBeforeUnmount(() => {
 }
 .reader__p {
   margin: 0.4em 0;
+}
+.reader__figure {
+  margin: 0.8em 0;
+  text-align: center;
+  break-inside: avoid-column;
+}
+.reader__figure img {
+  display: block;
+  margin: 0 auto;
+  max-width: 100%;
+  max-height: calc(100vh - var(--font-size) * 8);
+  object-fit: contain;
+}
+.reader__figure figcaption {
+  font-size: calc(var(--font-size) * 0.85);
+  color: var(--text-soft);
+  margin-top: 0.4em;
+  text-align: center;
 }
 
 .reader__topbar,
