@@ -8,6 +8,7 @@ import { sutra as ksitigarbhaSutraPart2Zh } from './ksitigarbha_sutra_part_2'
 import { sutra as ksitigarbhaSutraPart3Zh } from './ksitigarbha_sutra_part_3'
 import { sutra as platformSutraZh } from './platform_sutra'
 import { sutra as lotusSutraZh } from './lotus_sutra'
+import { sutra as perfectSutraZh } from './perfect_sutra'
 import { sutra as shurangamaSutraVol1Zh } from './shurangama_sutra_vol_1'
 import { sutra as shurangamaSutraVol2Zh } from './shurangama_sutra_vol_2'
 import { sutra as shurangamaSutraVol3Zh } from './shurangama_sutra_vol_3'
@@ -45,6 +46,7 @@ export const sutras: Sutra[] = [
   ksitigarbhaSutraPart3Zh as Sutra,
   platformSutraZh as Sutra,
   lotusSutraZh as Sutra,
+  perfectSutraZh as Sutra,
   shurangamaSutraVol1Zh as Sutra,
   shurangamaSutraVol2Zh as Sutra,
   shurangamaSutraVol3Zh as Sutra,
