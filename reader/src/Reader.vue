@@ -94,7 +94,7 @@ function sectionPageCount(id: string): number {
 // Capture position as {anchor, fraction-within-section} so we can restore
 // proportionally after a layout change (font size / script / resize).
 function captureProgress(): { anchor: string; fraction: number } | undefined {
-  const anchor = currentSectionId()
+  const anchor = currentSectionId.value
   if (!anchor) return undefined
   const start = sectionStartPage(anchor)
   if (start === undefined) return undefined
@@ -115,7 +115,7 @@ function restoreProgress(p: { anchor: string; fraction: number }) {
 }
 
 function persist() {
-  const sectionId = currentSectionId()
+  const sectionId = currentSectionId.value
   const startPage = sectionId ? sectionStartPage(sectionId) : undefined
   const pageOffset = startPage !== undefined
     ? Math.max(0, currentPage.value - startPage)
@@ -146,9 +146,11 @@ function setTheme(t: Theme) {
   persist()
 }
 
-function currentSectionId(): string | undefined {
+const currentSectionId = computed<string | undefined>(() => {
   const t = track.value
   if (!t || !pageWidth.value) return undefined
+  // Touch totalPages so this recomputes after layout changes (font/script/resize)
+  void totalPages.value
   const pageStart = currentPage.value * pageWidth.value
   const pageEnd = pageStart + pageWidth.value
   const sectionEls = t.querySelectorAll<HTMLElement>('[data-section]')
@@ -159,7 +161,7 @@ function currentSectionId(): string | undefined {
     if (left < pageStart) lastBefore = el.dataset.section
   }
   return lastBefore
-}
+})
 
 function measure() {
   const v = viewer.value
@@ -264,6 +266,16 @@ function setSize(s: Size) {
 
 watch(size, persist)
 watch(theme, persist)
+
+watch(showToc, (open) => {
+  if (!open) return
+  const id = currentSectionId.value
+  if (!id) return
+  nextTick(() => {
+    const el = document.querySelector<HTMLElement>(`button[data-toc-id="${id}"]`)
+    el?.scrollIntoView({ block: 'center' })
+  })
+})
 
 onMounted(() => {
   measure()
@@ -383,7 +395,11 @@ onBeforeUnmount(() => {
           <h3>{{ conv('目錄') }}</h3>
           <ul>
             <li v-for="s in cSections" :key="s.id">
-              <button @click="jumpToAnchor(s.id); showToc = false">{{ s.title }}</button>
+              <button
+                :class="{ 'is-current': s.id === currentSectionId }"
+                :data-toc-id="s.id"
+                @click="jumpToAnchor(s.id); showToc = false"
+              >{{ s.title }}</button>
             </li>
           </ul>
         </div>
@@ -619,6 +635,11 @@ button { font-family: inherit; }
   border-radius: 6px;
 }
 .reader__toc-panel button:hover { background: var(--hover); }
+.reader__toc-panel button.is-current {
+  background: var(--btn-active-bg);
+  color: var(--btn-active-text);
+  font-weight: 600;
+}
 
 .reader__settings-btn {
   width: auto;
