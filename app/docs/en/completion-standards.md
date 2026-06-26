@@ -9,14 +9,14 @@ The journal can be set as a one-year goal from the day you receive it.
 Each section entails practical activities. Record your progress on a regular basis and have your effort certified by the Dharma Masters at your meditation center. Awards will be given for exemplary completion of the activities.
 
 ::: tip
-There are two levels of completion: **Basic** and **Advanced**.
+There are two levels of completion: **Basic (Commendable)** and **Advanced (Outstanding)**.
 :::
 
 ## Completion Standards at a Glance
 
-| Activity | Basic | Advanced |
+| Activity | Basic (Commendable) | Advanced (Outstanding) |
 |----------|-------|----------|
-| Take Courses | 2 terms of meditation classes or the Mahayana Sutra Study Class | Same as Basic |
+| Take Courses | 2 terms of meditation classes or the Mahayana Sutra Study Class | Same as Basic (Commendable) |
 | Recite Sutras | 108 times | 365 times |
 | Recite Dharma Excerpts | 40 excerpts | 40 excerpts |
 | Study Dharma Lectures | 24 Q&A sets (*Effortless Composure in the Changing World*) | 24 Q&A sets + one of three e-books |
@@ -25,7 +25,7 @@ There are two levels of completion: **Basic** and **Advanced**.
 | Meritorious Service | 60 hours | 120 hours |
 | Meditation | 108 sessions (≥ 12 at center) | 200 sessions (≥ 36 at center) |
 
-## Basic
+## Basic (Commendable)
 
 ### I. Scripture Study
 
@@ -101,7 +101,7 @@ The activities in this section help students foster a daily meditation practice 
 
 **Goal:** Accumulate a total of 108 sitting meditation sessions, of which at least 12 sessions must be completed during retreats at Chung Tai or a meditation center.
 
-## Advanced
+## Advanced (Outstanding)
 
 ### I. Scripture Study
 
@@ -140,7 +140,7 @@ Study the Grand Master's Dharma lectures on a regular basis, taking the words in
 **Goal:**
 
 - Complete the review of 24 sets of questions and answers from the English e-book *Effortless Composure in the Changing World*.
-- Upon achieving the Basic completion level, students may advance by completing any one of the three e-books listed below:
+- Upon achieving the Basic (Commendable) completion level, students may advance by completing any one of the three e-books listed below:
   - *Paths to Enlightenment*
   - *The Mind Seal of Prajna Wisdom*
   - *Bodhisattva in a Yellow Robe*
