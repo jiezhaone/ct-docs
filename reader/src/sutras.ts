@@ -3,6 +3,7 @@ import { sutra as diamondSutraZh } from './diamond_sutra'
 import { sutra as medicineSutraZh } from './medicine_sutra'
 import { sutra as guanyinSutraZh } from './guanyin_sutra'
 import { sutra as parentsKindnessSutraZh } from './parents_kindness_sutra'
+import { sutra as ksitigarbhaSutraZh } from './ksitigarbha_sutra'
 import { sutra as ksitigarbhaSutraPart1Zh } from './ksitigarbha_sutra_part_1'
 import { sutra as ksitigarbhaSutraPart2Zh } from './ksitigarbha_sutra_part_2'
 import { sutra as ksitigarbhaSutraPart3Zh } from './ksitigarbha_sutra_part_3'
@@ -44,6 +45,7 @@ export const sutras: Sutra[] = [
   medicineSutraZh as Sutra,
   guanyinSutraZh as Sutra,
   parentsKindnessSutraZh as Sutra,
+  ksitigarbhaSutraZh as Sutra,
   ksitigarbhaSutraPart1Zh as Sutra,
   ksitigarbhaSutraPart2Zh as Sutra,
   ksitigarbhaSutraPart3Zh as Sutra,
