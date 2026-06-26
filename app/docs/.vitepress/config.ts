@@ -31,6 +31,10 @@ export default defineConfig({
             ],
           },
           {
+            text: '完成標準',
+            items: [{ text: '活動內容及完成標準', link: '/completion-standards' }],
+          },
+          {
             text: '修行記錄',
             items: [
               { text: '報數（提交記錄）', link: '/submit-practice' },
@@ -83,6 +87,10 @@ export default defineConfig({
               { text: 'Starting a Journey & Past Journeys', link: '/en/journey' },
               { text: 'Passport Progress', link: '/en/progress' },
             ],
+          },
+          {
+            text: 'Completion Standards',
+            items: [{ text: 'Activity Content & Completion Standards', link: '/en/completion-standards' }],
           },
           {
             text: 'Practice Records',
